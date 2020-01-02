@@ -3,8 +3,7 @@ import requests
 from selenium import webdriver
 import time
 
-searchTerm = "Ahem"
-url = "https://www.google.com/search?q={0}".format(searchTerm)
+searchTerms = ["one", "two"]
 driver = webdriver.Chrome(
     'C:/ProgramData/chocolatey/lib/chromedriver/tools/chromedriver.exe')
 
@@ -26,6 +25,9 @@ def autoSearch(driver, url):
     return resultStats
 
 
-resultStats = autoSearch(driver, url)
-
-print(searchTerm, ' has ', resultStats)
+# iterate through searchTerms list and execute function on it
+for i in searchTerms:
+    url = "https://www.google.com/search?q={0}".format(i)
+    print("Searching " + url)
+    resultStats = autoSearch(driver, url)
+    print(i, ' has ', resultStats)
