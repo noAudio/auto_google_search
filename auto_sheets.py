@@ -2,8 +2,14 @@ from bs4 import BeautifulSoup
 import requests
 from selenium import webdriver
 import time
+import re
 
-searchTerms = ["one", "two"]
+# read list of search terms from a text file then
+# remove all newline characters
+searchTerms = open("search_terms.txt").readlines()
+searchTerms = [s.rstrip('\n') for s in searchTerms]
+
+# store position of chrome webdriver in a variable
 driver = webdriver.Chrome(
     'C:/ProgramData/chocolatey/lib/chromedriver/tools/chromedriver.exe')
 
@@ -21,8 +27,16 @@ def autoSearch(driver, url):
 
     # get data using a specific element id and
     # assign it to a variable
-    resultStats = soup.find_all(id="resultStats")[0].get_text()
-    return resultStats
+    results = soup.find_all(id="resultStats")[0].get_text()
+    return results
+
+
+def cleanString(dirtyResult):
+    partialClean = dirtyResult[6:]
+    fullClean = partialClean[:-23]
+    fullClean = re.sub(',', '', fullClean)
+
+    return fullClean
 
 
 # iterate through searchTerms list and execute function on it
@@ -33,12 +47,13 @@ for i in searchTerms:
     # pass the driver and url to the function
     resultStats = autoSearch(driver, url)
 
+    finalResults = cleanString(resultStats)
     # write the results to a text file
     f = open("results.txt", "a+")
-    f.write("{0}, {1}\n".format(i, resultStats))
+    f.write("{0}, {1}\n".format(i, finalResults))
     f.close()
 
-    print(i, ' has ', resultStats)
+    print('The search term ' + i + ' has ' + finalResults + ' results')
     print('Results written to file.')
 
 print('No search terms left')
