@@ -1,0 +1,6 @@
+Happy, 11110000000
+Sad, 1420000000
+Elated, 39600000
+Depressed, 954000000
+Monstercat, 8720000
+Upwork, 31400000

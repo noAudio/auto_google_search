@@ -33,7 +33,7 @@ def autoSearch(driver, url):
 
 def cleanString(dirtyResult):
     partialClean = dirtyResult[6:]
-    fullClean = partialClean[:-23]
+    fullClean = partialClean[:-24]
     fullClean = re.sub(',', '', fullClean)
 
     return fullClean
