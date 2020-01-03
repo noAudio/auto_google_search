@@ -7,7 +7,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 
 # add credentials received from Google API Console
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
-    'remotesheet-e958a8f4d2be.json', scope)
+    'foo.json', scope)
 
 # authorize access with credentials
 authorizedRemote = gspread.authorize(credentials)
