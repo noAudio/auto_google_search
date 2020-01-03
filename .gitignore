@@ -4,3 +4,5 @@ __pycache__/
 build/
 search.spec
 dist/
+.vscode/
+remotesheet-e958a8f4d2be.json
